@@ -7,6 +7,7 @@ using Tillascope.Domain.Abstract;
 using Tillascope.Domain.Entities;
 using Tillascope.Domain.Concrete;
 using Ninject;
+using System.Configuration;
 
 namespace Tillascope.WebUI.Infrastructure
 {
@@ -37,6 +38,14 @@ namespace Tillascope.WebUI.Infrastructure
             //3. put bindings here
             kernel.Bind<IProductRepository>().To<EFProductRepository>();
 
+            EmailSettings emailSettings = new EmailSettings
+            {
+                WriteAsFile = bool.Parse(ConfigurationManager
+                    .AppSettings["Email.WriteAsFile"] ?? "false")
+            };
+
+            kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
+                .WithConstructorArgument("settings", emailSettings);
             /* Mock<IProductRepository> mock = new Mock<IProductRepository>();
              mock.Setup(m => m.Products).Returns(new List<Product>
              {

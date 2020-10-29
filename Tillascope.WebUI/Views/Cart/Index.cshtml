@@ -1,10 +1,11 @@
 ﻿@model Tillascope.WebUI.Models.CartIndexViewModel
 @{
     ViewBag.Title = "Your cart";
+    ViewBag.Cart = "Your cart";
 }
 
 
-<div class="col-md-9">
+<div class="col-md-9" >
     <section>
         <div class="main-body">
             <div class="container-fluid">
@@ -27,10 +28,18 @@
                         <span class="small">Category: <b>@line.Product.Category</b></span>
                         <br />
                         <span class="h6">Price: <b>@line.Product.Price.ToString("c")</b></span>
+                        <br />
+                        @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                        {
+                            @Html.Hidden("ProductId", line.Product.ProductId)
+                            @Html.HiddenFor(x => x.ReturnUrl)
+                            <input class="btn btn-sm btn-warning" type="submit" value="Remove" />
+                        }
                     </div>
                     <div class="col-md-3 ta-c" style="padding-right:0;">
                         <div class="row bubbleRow">
                             <div class="bubble">
+                              
                                 <span class="glyphicon glyphicon-arrow-up"></span>
                             </div>
                         </div>
@@ -96,6 +105,8 @@
         </div>
     </aside>
     <br />
-    <div class="continueShopping"><a class="btn btn-primary continueShoppingBtn" href="@Model.ReturnUrl">Go to Checkout</a></div>
+    <div class="continueShopping">
+    @Html.ActionLink("Go to Checkout", "Checkout", null, new {  @class = "btn btn-primary continueShoppingBtn"})
+    </div>
 </div>
 

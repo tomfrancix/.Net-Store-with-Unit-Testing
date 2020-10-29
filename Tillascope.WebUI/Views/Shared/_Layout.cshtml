@@ -20,9 +20,10 @@
                     <li>@Html.ActionLink("Tillandsia Care", "Care", "Home")</li>
                     <li>@Html.ActionLink("Products", "List", "Product")</li>
                 </ul>
+                @Html.Action("Summary", "Cart");
             </div>
         </nav>
-        @if (ViewBag.Title == "Your cart")
+        @if (ViewBag.Cart == "Your cart")
         {
             @RenderBody()
         }

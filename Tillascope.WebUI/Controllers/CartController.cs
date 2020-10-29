@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Web;
 using System.Web.Mvc;
 using Tillascope.Domain.Abstract;
@@ -12,11 +13,13 @@ namespace Tillascope.WebUI.Controllers
     public class CartController : Controller
     {
         private IProductRepository repository;
+        private IOrderProcessor orderProcessor;
 
         // GET: Cart
-        public CartController(IProductRepository repo)
+        public CartController(IProductRepository repo, IOrderProcessor proc)
         {
             repository = repo;
+            orderProcessor = proc;
         }
 
         public ViewResult Index(Cart cart, string returnUrl)
@@ -50,14 +53,45 @@ namespace Tillascope.WebUI.Controllers
             }
             return RedirectToAction("Index", new { returnUrl });
         }
-       /* private Cart GetCart() {
-            Cart cart = (Cart)Session["Cart"];
-            if (cart == null)
+
+        public PartialViewResult Summary(Cart cart)
+        {
+            return PartialView(cart);
+        }
+
+        public ViewResult Checkout()
+        {
+            return View(new ShippingDetails());
+        }
+
+        [HttpPost]
+        public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails)
+        {
+            if (cart.Lines.Count() == 0)
             {
-                cart = new Cart();
-                Session["Cart"] = cart;
+                ModelState.AddModelError("", "Sorry, your cart is empty!");
             }
-            return cart;
-        }*/
+
+            if (ModelState.IsValid)
+            {
+                orderProcessor.ProcessOrder(cart, shippingDetails);
+                cart.Clear();
+                return View("Completed");
+            }
+            else
+            {
+                return View(shippingDetails);
+            }
+        }
+
+        /* private Cart GetCart() {
+             Cart cart = (Cart)Session["Cart"];
+             if (cart == null)
+             {
+                 cart = new Cart();
+                 Session["Cart"] = cart;
+             }
+             return cart;
+         }*/
     }
 }

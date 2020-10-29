@@ -1,0 +1,101 @@
+﻿@model Tillascope.WebUI.Models.CartIndexViewModel
+@{
+    ViewBag.Title = "Your cart";
+}
+
+
+<div class="col-md-9">
+    <section>
+        <div class="main-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="jumbotron">
+                        <span class="h3">
+                            @ViewBag.Title
+                        </span>
+                    </div>
+                </div>
+                @foreach (var line in Model.Cart.Lines)
+                {
+                <div class="row panel" style="padding:10px;">
+                    <div class="col-md-3">
+                        <img src="~/Content/Images/maria6.jpg" style="width:100%;" />
+                    </div>
+                    <div class="col-md-6">
+                        <span class="h3">@line.Product.Name</span>
+                        <br />
+                        <span class="small">Category: <b>@line.Product.Category</b></span>
+                        <br />
+                        <span class="h6">Price: <b>@line.Product.Price.ToString("c")</b></span>
+                    </div>
+                    <div class="col-md-3 ta-c" style="padding-right:0;">
+                        <div class="row bubbleRow">
+                            <div class="bubble">
+                                <span class="glyphicon glyphicon-arrow-up"></span>
+                            </div>
+                        </div>
+                        <div class="row bubbleRow" style="text-align:right;">
+                            <span class="h3">@line.Quantity</span>
+                        </div>
+                        <div class="row bubbleRow">
+                            <div class="bubble">
+                                <span class="glyphicon glyphicon-arrow-down"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </section>
+</div>
+<div class="col-md-3">
+    <aside>
+        <div class="continueShopping"><a class="btn btn-primary continueShoppingBtn" href="@Model.ReturnUrl">Continue shopping</a></div>
+        <div class="sidebar">
+
+            <div class="container-fluid">
+                <img src="~/Content/Images/logowhite.jpg" style="width:50px" />
+                <span class="h4" style="margin-top:10px;">TILLASCOPE</span>
+            </div>
+
+            <hr />
+            <span class="h4">Summary</span>
+            <br />
+            <br />
+            <div class="container cart-summary" style="width:100%;">
+                <div class="row">
+                    <div class="col-md-9 ta-l">
+                        <span>Subtotal</span>
+                    </div>
+                    <div class="col-md-3 ta-r">
+                        @Model.Cart.ComputeTotalValue().ToString("c")
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9 ta-l">
+                        <span>Estimated Delivery and Handling</span>
+                    </div>
+                    <div class="col-md-3 ta-r">
+                        <span>£0.00 </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9 ta-l">
+                        <span><b>Total</b></span>
+                    </div>
+                    <div class="col-md-3 ta-r">
+                        <b>
+                            @Model.Cart.ComputeTotalValue().ToString("c")
+                        </b>
+                    </div>
+                </div>
+                <br />
+
+            </div>
+        </div>
+    </aside>
+    <br />
+    <div class="continueShopping"><a class="btn btn-primary continueShoppingBtn" href="@Model.ReturnUrl">Go to Checkout</a></div>
+</div>
+

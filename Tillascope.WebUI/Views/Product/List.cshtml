@@ -1,0 +1,32 @@
+﻿@using Tillascope.WebUI.HtmlHelpers
+@model Tillascope.WebUI.Models.ProductsListViewModel
+
+@{
+    ViewBag.Title = "Products";
+}
+<div class="row">
+    <img src="~/Content/Images/TILLASCOPE (3).png" style="width:100%;" />
+</div>
+<br />
+@{var count = 0;
+    foreach (var p in Model.Products)
+    {
+        if (count%4 == 0)
+        {
+            <div class="row"></div>
+        }
+
+        count++;
+    <div class="col-md-3">
+        
+            @Html.Partial("ProductSummary", p)
+            
+    </div>
+
+    } 
+}
+<div class="row"></div>
+<div class="row">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x, category = Model.CurrentCategory }))
+</div>
+

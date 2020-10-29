@@ -1,0 +1,27 @@
+﻿@model Tillascope.Domain.Entities.Product
+
+
+
+<div class="panel">
+    <div class="panel panel-header">
+        <span class="h4">@Model.Name</span>
+    </div>
+    <div class="panel panel-body">
+        <img class="listImage" src="~/Content/Images/maria6.jpg" />
+
+        <span class="pull-left w-50 label label-primary fs-10">@Model.Price.ToString("c")</span>
+        
+        @using (Html.BeginForm("AddToCart", "Cart"))
+        {
+                @Html.HiddenFor(x => x.ProductId)
+                @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                <input type="submit"  class="pull-right w-50 label label-default" style="display:inline;" value="Add to cart" />
+           
+        }
+       @* <a class="pull-right w-50 label label-default">Add to cart</a>*@
+    </div>
+    <div class="panel panel-footer">
+        <span class="p">@Model.Description.Substring(0, 75)...</span> <a href="#">Read more</a>
+    </div>
+    @*<a class="btn btn-default">Buy it now...</a>*@
+</div>

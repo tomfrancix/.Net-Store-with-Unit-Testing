@@ -1,0 +1,85 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.w-50 {
+    width:50%;
+}
+.panel {
+    box-shadow:0 0 4px 4px rgba(190,190,190,0.1);
+}
+.panel.panel-header, .panel.panel-body {
+    margin-bottom:5px;
+}
+.sidebar {
+    width:100%;
+    height:auto;
+    padding:5px;
+    min-height:100px;
+    box-shadow:0 0 5px 5px rgba(120,120,120,0.1);
+    margin:0;
+    margin-top:20px;
+}
+.listImage {
+    width:100%;
+}
+.panel {
+    padding:0;
+}
+.fs-10 {
+    font-size:12px;
+    padding:4px 0 3px 0;
+}
+.ta-c {
+    text-align:right;
+}
+.ta-l {
+    text-align: left;
+}
+.ta-r {
+    text-align: right;
+}
+.bubbleRow {
+    height:40px;
+    width:100%;
+    text-align:center;
+}
+.cart-summary {
+    padding:0;
+}
+.cart-summary .row {
+    padding:5px;
+}
+.continueShoppingBtn {
+    width:100%;
+    background-color:rgba(20,20,20,1);
+}
+.bubble {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    right: 0;
+    margin-right: 0;
+    background-color: rgba(230,230,230,1);
+    padding: 5px;
+}

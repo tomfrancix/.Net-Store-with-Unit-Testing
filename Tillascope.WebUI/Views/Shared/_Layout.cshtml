@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">TILLASCOPE</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Our Story", "About", "Home")</li>
+                    <li>@Html.ActionLink("Tillandsia Care", "Care", "Home")</li>
+                    <li>@Html.ActionLink("Products", "List", "Product")</li>
+                </ul>
+            </div>
+        </nav>
+        @if (ViewBag.Title == "Your cart")
+        {
+            @RenderBody()
+        }
+        else
+        {
+            <div class="col-md-3">
+                <aside>
+                    <div class="sidebar">
+
+                        <div class="container-fluid">
+                            <img src="~/Content/Images/logowhite.jpg" style="width:100%" />
+                        </div>
+                        @Html.Action("Menu", "CategoryList")
+                        
+                    </div>
+                </aside>
+            </div>
+            <div class="col-md-9">
+                <section>
+                    <div class="main-body">
+                        <div class="container-fluid">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </section>
+            </div>
+        }
+    </div>
+    
+      
+</body>
+</html>
